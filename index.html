@@ -12,20 +12,19 @@
         }
 
         :root {
-            --primary-color: #7c3aed;
-            --secondary-color: #ec4899;
-            --accent-color: #f59e0b;
-            --light-bg: #ffffff;
-            --soft-bg: #f9f7f4;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --border-color: #e5e7eb;
+            --primary-red: #dc2626;
+            --primary-yellow: #fbbf24;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #f59e0b;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-dark);
+            background-color: var(--dark-bg);
+            color: var(--text-light);
             line-height: 1.6;
         }
 
@@ -35,18 +34,21 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            background: var(--light-bg);
-            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(90deg, var(--dark-card) 0%, rgba(30, 41, 59, 0.8) 100%);
+            border-bottom: 2px solid var(--primary-red);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: var(--primary-color);
-            letter-spacing: -1px;
+            font-size: 1.8em;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
         }
 
         nav ul {
@@ -57,57 +59,150 @@
 
         nav a {
             text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
+            color: var(--text-light);
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        nav a:hover {
-            color: var(--primary-color);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            padding: 80px 40px;
-            text-align: center;
-            color: white;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a2f4b 50%, rgba(220, 38, 38, 0.1) 100%);
+            padding: 60px 40px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-section {
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
         }
 
         .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 30px;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 4px solid var(--primary-red);
+            box-shadow: 0 0 60px rgba(220, 38, 38, 0.5), 0 0 100px rgba(251, 191, 36, 0.2);
+            filter: contrast(1.1) brightness(1.05);
+        }
+
+        .profile-image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-yellow), var(--primary-red));
+            border-radius: 20px;
+            z-index: -1;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .hero h1 {
             font-size: 3.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
         }
 
         .hero .subtitle {
-            font-size: 1.3em;
-            opacity: 0.95;
-            margin-bottom: 20px;
-            font-weight: 300;
+            font-size: 1.5em;
+            color: var(--primary-yellow);
+            font-weight: 600;
         }
 
-        .hero .info {
-            font-size: 1em;
-            opacity: 0.9;
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1em;
+            color: var(--text-light);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
         }
 
-        /* Main Container */
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            font-size: 1.5em;
+            color: var(--primary-red);
+            min-width: 30px;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -117,7 +212,7 @@
         /* Sections */
         section {
             padding: 80px 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid rgba(220, 38, 38, 0.1);
         }
 
         section:last-child {
@@ -125,10 +220,12 @@
         }
 
         section h2 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin-bottom: 50px;
-            color: var(--text-dark);
-            text-align: center;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             position: relative;
             padding-bottom: 20px;
         }
@@ -137,11 +234,10 @@
             content: '';
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
             border-radius: 2px;
         }
 
@@ -149,175 +245,210 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
             margin-top: 40px;
         }
 
         .card {
-            background: var(--soft-bg);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.5));
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 10px;
+            border: 2px solid rgba(220, 38, 38, 0.3);
             transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-color);
+            transform: translateY(-8px);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4), 0 0 50px rgba(251, 191, 36, 0.1);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(30, 41, 59, 0.7));
         }
 
         .card h3 {
-            font-size: 1.3em;
+            font-size: 1.4em;
             margin-bottom: 12px;
-            color: var(--primary-color);
+            color: var(--primary-yellow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .card p {
-            color: var(--text-light);
+            color: var(--text-muted);
             line-height: 1.8;
         }
 
-        .card .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
+        .card .year {
+            color: var(--primary-red);
+            font-weight: 700;
             margin-top: 12px;
-            font-weight: 600;
+            display: block;
         }
 
         /* Certifications Section */
         .certification-item {
-            background: white;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(251, 191, 36, 0.02));
             padding: 25px;
             margin-bottom: 20px;
             border-radius: 10px;
-            border-left: 4px solid var(--primary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary-red);
+            border: 2px solid rgba(220, 38, 38, 0.2);
+            border-left: 5px solid var(--primary-red);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .certification-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
         }
 
         .certification-item:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            border-left-color: var(--secondary-color);
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+            border-left-color: var(--primary-yellow);
         }
 
         .certification-item h4 {
-            color: var(--text-dark);
+            color: var(--primary-yellow);
             margin-bottom: 8px;
-            font-size: 1.1em;
+            font-size: 1.2em;
         }
 
         .certification-item .year {
-            color: var(--secondary-color);
+            color: var(--primary-red);
             font-weight: 600;
-            font-size: 0.9em;
+            font-size: 0.95em;
+            margin-top: 10px;
         }
 
         .certification-item p {
-            color: var(--text-light);
+            color: var(--text-muted);
             margin-top: 8px;
         }
 
         /* Hobbies */
         .hobby-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
         .hobby-card {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(236, 72, 153, 0.1));
-            padding: 30px;
-            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(251, 191, 36, 0.05));
+            padding: 35px 25px;
+            border-radius: 10px;
             text-align: center;
-            border: 1px solid var(--border-color);
+            border: 2px solid rgba(220, 38, 38, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hobby-card::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            transition: left 0.5s;
+        }
+
+        .hobby-card:hover::after {
+            left: 100%;
         }
 
         .hobby-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.2);
-            border-color: var(--primary-color);
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4), 0 0 50px rgba(251, 191, 36, 0.15);
         }
 
         .hobby-icon {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 15px;
+            display: inline-block;
         }
 
         .hobby-card h3 {
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            color: var(--primary-yellow);
+            margin-bottom: 12px;
+            font-size: 1.3em;
         }
 
         .hobby-card p {
-            color: var(--text-light);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-
-        .about-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3em;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
         /* Button */
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            color: var(--dark-bg);
+            padding: 14px 40px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
-            margin-top: 15px;
+            margin-top: 20px;
             border: none;
             cursor: pointer;
+            font-size: 1.05em;
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(220, 38, 38, 0.5), 0 0 60px rgba(251, 191, 36, 0.2);
         }
 
         /* Footer */
         footer {
-            background: var(--text-dark);
-            color: white;
+            background: linear-gradient(90deg, var(--dark-card) 0%, rgba(30, 41, 59, 0.8) 100%);
+            color: var(--text-light);
             text-align: center;
             padding: 40px 20px;
             margin-top: 60px;
+            border-top: 2px solid var(--primary-red);
         }
 
         footer p {
             opacity: 0.8;
             margin: 10px 0;
+        }
+
+        .footer-accent {
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
         }
 
         /* Responsive */
@@ -328,10 +459,22 @@
 
             nav ul {
                 gap: 15px;
+                font-size: 0.9em;
             }
 
             .hero {
-                padding: 60px 20px;
+                padding: 40px 20px;
+                min-height: auto;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .profile-image-wrapper {
+                width: 250px;
+                height: 250px;
             }
 
             .hero h1 {
@@ -339,12 +482,7 @@
             }
 
             .hero .subtitle {
-                font-size: 1.1em;
-            }
-
-            .profile-image {
-                width: 150px;
-                height: 150px;
+                font-size: 1.3em;
             }
 
             .container {
@@ -362,15 +500,6 @@
             .grid, .hobby-grid {
                 grid-template-columns: 1fr;
             }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .about-image {
-                height: 300px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -387,24 +516,28 @@
             }
 
             .hero {
-                padding: 40px 15px;
+                padding: 30px 15px;
             }
 
             .hero h1 {
                 font-size: 2em;
             }
 
-            .profile-image {
-                width: 120px;
-                height: 120px;
+            .profile-image-wrapper {
+                width: 200px;
+                height: 200px;
             }
 
             section h2 {
-                font-size: 1.6em;
+                font-size: 1.8em;
             }
 
             .card, .certification-item {
                 padding: 20px;
+            }
+
+            .info-item {
+                font-size: 1em;
             }
         }
     </style>
@@ -425,11 +558,36 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=David" alt="David Nikollari" class="profile-image">
-            <h1>David Nikollari</h1>
-            <p class="subtitle">The Hero Within</p>
-            <div class="info">
-                📍 Roma, Italia | 🗓️ Nato il 01/08/2012
+            <!-- Profile Image (Left) -->
+            <div class="profile-section">
+                <div class="profile-image-wrapper">
+                    <img src="https://api.dicebear.com/7.x/personas/svg?seed=DavidNikollari&backgroundColor=1a1a2e,16213e&scale=100" alt="David Nikollari" class="profile-image">
+                </div>
+            </div>
+
+            <!-- Info (Right) -->
+            <div class="hero-info">
+                <h1>David<br>Nikollari</h1>
+                <p class="subtitle">The Hero Within</p>
+                
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <span>Roma, Italia</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🗓️</span>
+                    <span>Nato il 01/08/2012</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">💻</span>
+                    <span>Web Developer in Training</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🎯</span>
+                    <span>Passionato di Tecnologia</span>
+                </div>
+
+                <button class="btn">Scopri di più</button>
             </div>
         </div>
     </section>
@@ -438,14 +596,19 @@
     <section id="about">
         <div class="container">
             <h2>Chi Sono</h2>
-            <div class="about-content">
-                <div>
-                    <p>Sono David, un giovane appassionato di tecnologia e avventure provenienti dal cuore di Roma. Come Clark Kent in Smallville, credo nel potere di scoprire il vero significato della forza.</p>
-                    <p>La mia ricerca è quella di unire il mondo digitale con l'avventura nel mondo reale, sempre alla ricerca di nuove sfide e esperienze che mi aiutino a crescere.</p>
-                    <p>Sono dedicato al learning continuo, specialmente nel campo dello sviluppo web e della tecnologia moderna.</p>
-                    <button class="btn">Scopri di più</button>
+            <div class="grid">
+                <div class="card">
+                    <h3>🌟 La Mia Storia</h3>
+                    <p>Sono David, un giovane appassionato di tecnologia provenienti dal cuore di Roma. Come Clark Kent in Smallville, credo nel potere di scoprire il vero significato della forza - non quella fisica, ma quella del carattere e della perseveranza.</p>
                 </div>
-                <div class="about-image">🌟</div>
+                <div class="card">
+                    <h3>🚀 Obiettivi</h3>
+                    <p>La mia ricerca è quella di unire il mondo digitale con l'avventura nel mondo reale. Sono dedicato al learning continuo, specialmente nel campo dello sviluppo web e della tecnologia moderna.</p>
+                </div>
+                <div class="card">
+                    <h3>💪 Valori</h3>
+                    <p>Perseveranza, curiosità e determinazione. Sempre alla ricerca di nuove sfide e esperienze che mi aiutino a crescere come persona e come developer.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -454,25 +617,29 @@
     <section id="education">
         <div class="container">
             <h2>Studi & Certificazioni</h2>
+            
             <div class="certification-item">
                 <h4>🎓 Diploma di Scuola Superiore</h4>
                 <p>Indirizzo: Informatica e Telecomunicazioni</p>
-                <p class="year">📅 In corso - 2028</p>
+                <span class="year">📅 In corso - 2028</span>
             </div>
+
             <div class="certification-item">
                 <h4>💻 Certificazione HTML5 & CSS3</h4>
-                <p>Fondamenti dello sviluppo web moderno e design responsivo</p>
-                <p class="year">📅 Rilasciata - 2025</p>
+                <p>Fondamenti dello sviluppo web moderno e design responsivo. Mastery dei linguaggi base del web.</p>
+                <span class="year">📅 Rilasciata - 2025</span>
             </div>
+
             <div class="certification-item">
                 <h4>⚙️ Certificazione JavaScript Essentials</h4>
-                <p>Programmazione frontend, DOM manipulation e interattività web</p>
-                <p class="year">📅 Rilasciata - 2025</p>
+                <p>Programmazione frontend, DOM manipulation e interattività web. Competenze avanzate in JavaScript puro.</p>
+                <span class="year">📅 Rilasciata - 2025</span>
             </div>
+
             <div class="certification-item">
                 <h4>🌐 Certificazione Responsive Web Design</h4>
-                <p>Design e layout per tutti i dispositivi, mobile-first approach</p>
-                <p class="year">📅 Rilasciata - 2026</p>
+                <p>Design e layout per tutti i dispositivi, mobile-first approach e best practices moderne.</p>
+                <span class="year">📅 Rilasciata - 2026</span>
             </div>
         </div>
     </section>
@@ -485,18 +652,21 @@
                 <div class="hobby-card">
                     <div class="hobby-icon">🎮</div>
                     <h3>GTA V</h3>
-                    <p>Passione per il gaming e i mondi open-world. Mi piace esplorare Liberty City e completare le missioni epiche della saga Grand Theft Auto.</p>
+                    <p>Passione per il gaming e i mondi open-world. Mi piace esplorare e completare le missioni epiche della saga Grand Theft Auto.</p>
                 </div>
+
                 <div class="hobby-card">
                     <div class="hobby-icon">🚴</div>
                     <h3>Ciclismo</h3>
                     <p>Avventure su due ruote attraverso i percorsi di Roma. Una passione per il fitness e l'esplorazione all'aria aperta.</p>
                 </div>
+
                 <div class="hobby-card">
                     <div class="hobby-icon">🥾</div>
                     <h3>Trekking</h3>
                     <p>Escursioni in natura tra i sentieri montani. Amore per l'avventura e la scoperta di paesaggi mozzafiato.</p>
                 </div>
+
                 <div class="hobby-card">
                     <div class="hobby-icon">📺</div>
                     <h3>Cinema & Serie TV</h3>
@@ -508,9 +678,9 @@
 
     <!-- Footer -->
     <footer id="contact">
-        <p>&copy; 2026 David Nikollari - All Rights Reserved</p>
+        <p>&copy; 2026 <span class="footer-accent">David Nikollari</span> - All Rights Reserved</p>
         <p>🌍 Roma, Italia | 💻 Web Developer in Training</p>
-        <p style="margin-top: 20px; font-size: 0.9em;">✨ Designed with passion</p>
+        <p style="margin-top: 20px; font-size: 0.9em;">✨ <span class="footer-accent">Designed with passion</span></p>
     </footer>
 </body>
 </html>
